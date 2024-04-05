@@ -35,6 +35,11 @@ function addDiv() {
     newDiv.className = 'box';// 2em methode
     //on va ajouter un style a notr div => <div class='box' style= "background-color : red"></div>
     newDiv.style.backgroundColor = randomColor();
+    //ajout d un evenement sur la div
+    newDiv.addEventListener('click', () => {
+        container.removeChild(newDiv);
+        checkDiv;
+    })
     // on va  imbriqué la nouvell div dans la div container
     container.appendChild(newDiv);
 }
