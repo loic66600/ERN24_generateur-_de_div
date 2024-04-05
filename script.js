@@ -1,3 +1,16 @@
+function checkDiv() {
+    let container = document.getElementById('container');
+    let boxes = document.getElementsByClassName('box');
+    if (boxes.length > 0) {
+        document.getElementById('removeLastbutton').style.display = 'inline-block';
+        document.getElementById('removeAllDiv').style.display = 'inline-block';
+    } else {
+        document.getElementById('removeLastbutton').style.display = 'none';
+        document.getElementById('removeAllDiv').style.display = 'none';
+
+    }
+}
+
 // rgba(255,0,0)=>
 //on cree une fonction quio cree un chiffre entre 0 et 255
 function randomNumber() {
@@ -34,6 +47,7 @@ let addbutton = document.getElementById('addbutton');
 addbutton.addEventListener("click", () => {
     //on appelle notre fonction
     addDiv();
+    checkDiv()
 });
 
 // fonction qui enlève la derrnier div
@@ -48,19 +62,24 @@ function removelastDiv() {
     if (boxes.length > 0) {
         //enlever la dernier div
         container.removeChild(boxes[boxes.length - 1]);
+        checkDiv();
     }
 }
 // on rajout evenemrn remouvLast div
-document.getElementById('removLastbutton').addEventListener('click', () => {
-    removelastDiv()
+document.getElementById('removeLastbutton').addEventListener('click', () => {
+    removelastDiv();
+
 })
 
 //fonction qui supprime tous
 function remouveAllDiv() {
     let container = document.getElementById('container');
     container.innerHTML = "";
+    checkDiv();
 
 }
-document.getElementById('remouveAllDiv').addEventListener('click', () => {
+document.getElementById('removeAllDiv').addEventListener('click', () => {
     remouveAllDiv()
 })
+// appel initiale de la fonction 
+checkDiv();
