@@ -1,15 +1,22 @@
 function checkDiv() {
     let container = document.getElementById('container');
     let boxes = document.getElementsByClassName('box');
+
     if (boxes.length > 0) {
         document.getElementById('removeLastbutton').style.display = 'inline-block';
         document.getElementById('removeAllDiv').style.display = 'inline-block';
+        if (boxes.length > 1) {
+            document.getElementById('suffleButton').style.display = 'inline-block';
+        } else {
+            document.getElementById('suffleButton').style.display = 'none';
+        }
     } else {
         document.getElementById('removeLastbutton').style.display = 'none';
         document.getElementById('removeAllDiv').style.display = 'none';
-
+        document.getElementById('suffleButton').style.display = 'none';
     }
 }
+
 
 // rgba(255,0,0)=>
 //on cree une fonction quio cree un chiffre entre 0 et 255
@@ -35,11 +42,13 @@ function addDiv() {
     newDiv.className = 'box';// 2em methode
     //on va ajouter un style a notr div => <div class='box' style= "background-color : red"></div>
     newDiv.style.backgroundColor = randomColor();
+
     //ajout d un evenement sur la div
     newDiv.addEventListener('click', () => {
         container.removeChild(newDiv);
         checkDiv;
     })
+
     // on va  imbriqué la nouvell div dans la div container
     container.appendChild(newDiv);
 }
@@ -52,7 +61,7 @@ let addbutton = document.getElementById('addbutton');
 addbutton.addEventListener("click", () => {
     //on appelle notre fonction
     addDiv();
-    checkDiv()
+    checkDiv();
 });
 
 // fonction qui enlève la derrnier div
@@ -75,6 +84,26 @@ document.getElementById('removeLastbutton').addEventListener('click', () => {
     removelastDiv();
 
 })
+
+document.getElementById('suffleButton').addEventListener('click', () => {
+    suffleButton();
+})
+
+function suffleButton() {
+    let container = document.getElementById('container');
+    let boxes = document.getElementsByClassName('box');
+    if (boxes.length > 1) {
+        // on cree un tableau pour stocker les div$
+        let divArray = Array.from(boxes).sort(() => Math.random() - 0.5);
+        console.log(divArray);
+        //on vide le container
+        container.innerHTML = "";
+
+        divArray.forEach((div) => {
+            container.appendChild(div);
+        })
+    }
+}
 
 //fonction qui supprime tous
 function remouveAllDiv() {
